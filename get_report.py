@@ -71,14 +71,16 @@ class Report:
         # Return the report URL
         return self.get_request()['url']
 
-    def download_report(self, link, date):
+    def download_report(self, link, date, save_directory='reports'):
         print('Downloading report.')
-        # Send a GET request to download the report
+        # Specify the file path
+        file_path = os.path.join(save_directory, f'report-{date}.json.gz')
+
         try:
             response = requests.get(link, verify=True)
             response.raise_for_status()
-            # Save the report to a file
-            with open(f'reports/report-{date}.json.gz', 'wb') as f:
+            # Save the report to the specified file path
+            with open(file_path, 'wb') as f:
                 file = f.write(response.content)
             return file
         except requests.exceptions.RequestException as e:
@@ -105,9 +107,12 @@ class Report:
         except KeyError as e:
             print(f"Error iterating report data: {e}")
 
-    def delete_file(self, date):
+    def delete_file(self, date, save_directory='reports'):
+        # Specify the file path for deletion
+        file_path = os.path.join(save_directory, f'report-{date}.json.gz')
+
         # Delete the saved report file
         try:
-            os.remove(f'reports/report-{date}.json.gz')
+            os.remove(file_path)
         except FileNotFoundError as e:
-            print(f"Error deleting report file: {e}")
+            print(f"File Amazon Advertising not found. Error deleting report file: {e}")

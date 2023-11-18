@@ -86,14 +86,16 @@ class ReportSeller:
         except requests.exceptions.RequestException as e:
             print(f"Error getting Seller report by document ID: {e}")
 
-    def download_report(self, link):
+    def download_report(self, link, date, save_directory='report_seller'):
         print('Downloading report.')
-        # Send a GET request to download the report
+        # Specify the file path
+        file_path = os.path.join(save_directory, f'report-{date}.json.gz')
+
         try:
             response = requests.get(link, verify=True)
             response.raise_for_status()
-            # Save the report to a file
-            with open(f'report_seller/report-{self.date}.json.gz', 'wb') as f:
+            # Save the report to the specified file path
+            with open(file_path, 'wb') as f:
                 file = f.write(response.content)
             return file
         except requests.exceptions.RequestException as e:
@@ -137,6 +139,12 @@ class ReportSeller:
         except KeyError as e:
             print(f"Error iterating Seller report by ASIN: {e}")
 
-    def delete_file(self):
+    def delete_file(self, date, save_directory='report_seller'):
+        # Specify the file path for deletion
+        file_path = os.path.join(save_directory, f'report-{date}.json.gz')
+
         # Delete the saved report file
-        os.remove(f'report_seller/report-{self.date}.json.gz')
+        try:
+            os.remove(file_path)
+        except FileNotFoundError as e:
+            print(f"File Amazon Seller not found. Error deleting report file: {e}")
