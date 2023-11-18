@@ -5,10 +5,8 @@ from amazon_seller_token import AccessTokenSeller
 from get_report import Report
 from get_token import AccessToken
 from google_sheet import GoogleSheet
-import os
+from config import REFRESH_TOKEN
 
-# Refresh token Amazon Advertising
-REFRESH_TOKEN = os.environ.get('refresh_token')
 
 # Set date ranges
 start_date = str(datetime.datetime.now() - datetime.timedelta(days=2))[:10]

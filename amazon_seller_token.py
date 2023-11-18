@@ -1,10 +1,5 @@
 import requests
-import os
-
-# Amazon Seller API credentials
-REFRESH_TOKEN_SELLER = os.environ.get('refresh_token_seller')
-CLIENT_SELLER_ID = os.environ.get('client_seller_id')
-CLIENT_SELLER_SECRET = os.environ.get('client_seller_secret')
+from config import CLIENT_SELLER_ID, REFRESH_TOKEN_SELLER, CLIENT_SELLER_SECRET
 
 
 class AccessTokenSeller:

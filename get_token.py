@@ -1,11 +1,5 @@
 import requests
-import os
-
-
-# Amazon API credentials from environment variables
-CLIENT_ID = os.environ.get('client_id')
-CLIENT_SECRET = os.environ.get('client_secret')
-URL = 'https://api.amazon.com/auth/o2/token'
+from config import CLIENT_ID, CLIENT_SECRET, URL_ACCESS_TOKEN
 
 
 class AccessToken:
@@ -28,7 +22,7 @@ class AccessToken:
 
         # Send a POST request to get the access token
         try:
-            response = requests.post(URL, headers=headers, data=data)
+            response = requests.post(URL_ACCESS_TOKEN, headers=headers, data=data)
             response.raise_for_status()
             r_json = response.json()
             return r_json["access_token"]

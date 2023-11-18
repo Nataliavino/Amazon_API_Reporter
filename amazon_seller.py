@@ -3,11 +3,8 @@ import time
 import json
 import gzip
 import requests
+from config import REPORT_TYPE, URL_REPORT_SELLER
 import os
-
-REPORT_TYPE = 'GET_SALES_AND_TRAFFIC_REPORT'
-URL = 'https://sellingpartnerapi-na.amazon.com'
-REFRESH_TOKEN_SELLER = os.environ.get('refresh_token_seller')
 
 
 class ReportSeller:
@@ -51,7 +48,7 @@ class ReportSeller:
 
         # Send a POST request to get the report id
         try:
-            response = requests.post(f'{URL}/reports/2021-06-30/reports', json=param,headers=self.headers)
+            response = requests.post(f'{URL_REPORT_SELLER}/reports/2021-06-30/reports', json=param, headers=self.headers)
             response.raise_for_status()  # Raise an exception for HTTP errors
             self.id = response.json()['reportId']
         except requests.exceptions.RequestException as e:
@@ -60,7 +57,7 @@ class ReportSeller:
     def get_report_document_id(self):
         # Send a GET request to get the report document id
         try:
-            response = requests.get(f'{URL}/reports/2021-06-30/reports/{self.id}', headers=self.headers)
+            response = requests.get(f'{URL_REPORT_SELLER}/reports/2021-06-30/reports/{self.id}', headers=self.headers)
             response.raise_for_status()
             print('Waiting document id...')
             return response.json()
@@ -80,7 +77,7 @@ class ReportSeller:
     def get_report_by_document_id(self):
         # Send a GET request to get the report by document id
         try:
-            response = requests.get(f'{URL}/reports/2021-06-30/documents/{self.document_id}', headers=self.headers)
+            response = requests.get(f'{URL_REPORT_SELLER}/reports/2021-06-30/documents/{self.document_id}', headers=self.headers)
             response.raise_for_status()
             return response.json()['url']
         except requests.exceptions.RequestException as e:

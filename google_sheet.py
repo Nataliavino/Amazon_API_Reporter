@@ -1,18 +1,8 @@
 import gspread
 import time
-import os
+from config import (PROJECT_ID, PRIVATE_KEY_ID, PRIVATE_KEY, CLIENT_EMAIL, CLIENT_ID_GOOGLE, CLIENT_CERT_URL,
+                    SPREADSHEET_ID, SHEET_ID, SHEET_ID_SELLER_TRAFFIC, SHEET_ID_SELLER_ASIN)
 
-# Google Sheets API credentials
-SPREADSHEET_ID = os.environ.get("spreadsheet_id")
-SHEET_ID = os.environ.get("sheet_id")
-PROJECT_ID = os.environ.get("project_id")
-SHEET_ID_SELLER_TRAFFIC = os.environ.get("sheet_id_seller_traffic")
-SHEET_ID_SELLER_ASIN = os.environ.get("sheet_id_seller_asin")
-PRIVATE_KEY_ID = os.environ.get("private_key_id")
-PRIVATE_KEY = os.environ.get("private_key").replace(r'\n', '\n')
-CLIENT_EMAIL = os.environ.get("client_email")
-CLIENT_ID_GOOGLE = os.environ.get("client_id_google")
-CLIENT_CERT_URL = os.environ.get("client_cert_url")
 
 # Google Sheets credentials
 CREDS = {

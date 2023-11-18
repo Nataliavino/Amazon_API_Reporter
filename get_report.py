@@ -3,12 +3,7 @@ import json
 import gzip
 import requests
 import os
-
-# Amazon Advertising API credentials
-REFRESH_TOKEN = os.environ.get('refresh_token')
-CLIENT_ID = os.environ.get('client_id')
-CLIENT_SECRET = os.environ.get('client_secret')
-PROFILE_ID = os.environ.get('profile_id')
+from config import CLIENT_ID, PROFILE_ID
 
 
 class Report:
