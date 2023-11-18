@@ -7,7 +7,7 @@ from get_token import AccessToken
 from google_sheet import GoogleSheet
 import os
 
-# Get refresh token from environment variable
+# Refresh token Amazon Advertising
 REFRESH_TOKEN = os.environ.get('refresh_token')
 
 # Set date ranges
